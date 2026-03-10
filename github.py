@@ -1,7 +1,8 @@
+#10/03/2026
 import os
 
 print("✉️ configurando email....")
-comando_email = "git config user.email '20241pvai0030030@estudantes.ifpr.edu.br"
+comando_email = "git config user.email \"20241pvai0030030@estudantes.ifpr.edu.br\" "
 os.system(comando_email)
 
 print("🆕 Adicionando modificaçôes...")
@@ -15,7 +16,7 @@ while(len(mensagem) < 5):
     mensagem = input("💬Mensagem do commit: ")
 
 print("✅ Registrando alterações...")
-comando02 = f"git commit -m'{mensagem}'"
+comando02 = f"git commit -m \"{mensagem}\" "
 os.system(comando02)
 
 print("🔁Enviando projeto ao GitHub")

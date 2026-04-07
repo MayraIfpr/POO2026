@@ -1,44 +1,23 @@
-class Aluno:
-    def __init__(self, nome, idade, curso):
-        self.nome = nome
-        self.idade = idade
-        self.curso = curso
-        self.ra = ""
-        self.notas = [0]*3
-        
- 
- # RA = constantes, Ra = Classe, ra = variavel
- 
-    def apresentar(self):
-        print(f"Olá, meu nome é {self.nome}, tenho {self.idade} anos e faço o curso de {self.curso}.")
-        while(self.ra == ""):
-            print("Esse aluno não tem RA.")
-            ra = input("Informe o RA: ")
+from aluno_principal import Aluno, Turma
 
-        print(f"O RA é: {self.ra}")
-     
-    def pedir_notas(self):
-        for i in range(0, len(self.notas)):
-            self.notas[i] = int(input(f"Digite a nota {i+1}:"))
+mayra = Aluno("Mayra", 16, "Info")
+ana = Aluno("Ana", 17, "Info")
+enzo = Aluno("Enzo", 17, "Info")
 
-    def calcular_media(self):
-        soma = 0.0
-        for i in range(0, len(self.notas)):
-            soma+=self.notas[i]
-        media = soma/len(self.notas)
-        return media    
-            
-nome = input("Qual seu nome: ")
-idade = int(input("Qual sua idade: "))
-curso = input("Qual o curso que você está cursando: ")
+info2024 = Turma("INFO2024", 2024)
+info2024.estudantes.append(mayra)
+info2024.estudantes.append(ana)
+info2024.estudantes.append(enzo)
 
-mayra = Aluno(nome, idade, curso)
-mayra.pedir_notas()
-print("A média é : ", mayra.calcular_media())
+# nome = input("Qual seu nome: ")
+# idade = int(input("Qual sua idade: "))
+# curso = input("Qual o curso que você está cursando: ")
 
-   
-    
-# ra = input("Qual seu ra: ")
+# mayra = Aluno(nome, idade, curso)
+# mayra.pedir_notas()
+# print("A média é : ", mayra.calcular_media())
+  
+# # ra = input("Qual seu ra: ")
 # alun1 = Aluno(nome, idade, curso)
 # alun1.apresentar()
 # alun1.ra = ra

@@ -31,7 +31,10 @@ class Aluno:
         def __init__(self, nome, ano):
             self.nome = nome
             self.ano = ano
-            self.estud
+            self.estudantes = []
 
         def apresentar(self):
             print(f"{self.nome} - {self.ano}")
+
+        #def exibir_estudantes(self):
+            #for e in self.estudantes

@@ -1,0 +1,361 @@
+lass Animal:
+    def __init__(self, nome, especie, patas):
+        self.nome = nome
+        self.especie = especie
+        self.patas = patas
+
+    def repirar(self):
+        print("Respirando...")
+
+class Cachorro(Animal):
+    def abanar_rabo(self):
+        print(Cachorro)
+
+class Gato(Animal):
+    def ronronar(self):
+        print(Gato)  
+from heranca_classes import Animal, Gato, Cachorro
+
+mello = Gato("Mello", "Gato", 4)
+print(f"Meu gato é o {mello.nome}")
+
+mello.respirar()
+
+mello.ronronar()
+
+
+
+##exercicios#
+
+import math
+
+class Calculadora:
+    def __init__(self, marca, modelo, ano):
+        self.marca = marca
+        self.modelo = modelo
+        self.ano = ano
+
+    # Soma
+    def somar(self, a, b, c=0):
+        return a + b + c
+
+    # Subtração
+    def subtrair(self, a, b, c=0):
+        return a - b - c
+
+    # Multiplicação
+    def multiplicar(self, a, b, c=1):
+        return a * b * c
+
+    # Divisão
+    def dividir(self, a, b):
+        if b == 0:
+            return "Erro: divisão por zero!"
+        return a / b
+
+
+class CalculadoraCientifica(Calculadora):
+    def __init__(self, marca, modelo, ano):
+        super().__init__(marca, modelo, ano)
+        self.funcoes_cientificas = "Potência e Raiz Quadrada"
+
+    def potencia(self, base, expoente):
+        return base ** expoente
+
+    def raiz_quadrada(self, numero):
+        if numero < 0:
+            return "Erro: número negativo!"
+        return math.sqrt(numero)
+
+
+
+print(" CALCULADORA ")
+
+marca = input("Marca: ")
+modelo = input("Modelo: ")
+ano = int(input("Ano: "))
+
+calc = Calculadora(marca, modelo, ano)
+
+a = float(input("Digite o primeiro número: "))
+b = float(input("Digite o segundo número: "))
+
+print("\nResultados:")
+print("Soma:", calc.somar(a, b))
+print("Subtração:", calc.subtrair(a, b))
+print("Multiplicação:", calc.multiplicar(a, b))
+print("Divisão:", calc.dividir(a, b))
+
+print("CALCULADORA CIENTÍFICA")
+
+calc_cient = CalculadoraCientifica("Casio", "FX-991", 2024)
+
+valor = float(input("Digite um valor: "))
+
+print("Valor ao cubo:", calc_cient.potencia(valor, 3))
+print("Raiz quadrada:", calc_cient.raiz_quadrada(valor))
+
+
+
+
+
+
+class Veiculo:
+    def __init__(self, marca, modelo, ano):
+        self.marca = marca
+        self.modelo = modelo
+        self.ano = ano
+        self.velocidade_atual = 0
+
+    def acelerar(self):
+        self.velocidade_atual += 10
+        print(f"Acelerando... Velocidade: {self.velocidade_atual} km/h")
+
+    def frear(self):
+        self.velocidade_atual -= 10
+
+        if self.velocidade_atual < 0:
+            self.velocidade_atual = 0
+
+        print(f"Freando... Velocidade: {self.velocidade_atual} km/h")
+
+    def info(self):
+        return f"{self.marca} {self.modelo} ({self.ano}) - {self.velocidade_atual} km/h"
+
+
+
+class Carro(Veiculo):
+    def __init__(self, marca, modelo, ano, numero_portas):
+        super().__init__(marca, modelo, ano)
+        self.numero_portas = numero_portas
+
+    def acelerar(self):
+        self.velocidade_atual += 15
+        print(f"Carro acelerando... Velocidade: {self.velocidade_atual} km/h")
+
+    def info(self):
+        return f"{self.marca} {self.modelo} ({self.ano}) - {self.numero_portas} portas - {self.velocidade_atual} km/h"
+
+
+
+
+class Moto(Veiculo):
+    def __init__(self, marca, modelo, ano, cilindradas):
+        super().__init__(marca, modelo, ano)
+        self.cilindradas = cilindradas
+
+    def acelerar(self):
+        self.velocidade_atual += 20
+        print(f"Moto acelerando... Velocidade: {self.velocidade_atual} km/h")
+
+    def frear(self):
+        self.velocidade_atual -= 15
+
+        if self.velocidade_atual < 0:
+            self.velocidade_atual = 0
+
+        print(f"Moto freando... Velocidade: {self.velocidade_atual} km/h")
+
+    def info(self):
+        return f"{self.marca} {self.modelo} ({self.ano}) - {self.cilindradas}cc - {self.velocidade_atual} km/h"
+
+
+
+
+class Caminhao(Veiculo):
+    def __init__(self, marca, modelo, ano, capacidade_carga):
+        super().__init__(marca, modelo, ano)
+        self.capacidade_carga = capacidade_carga
+        self.carga_atual = 0
+
+    def acelerar(self):
+        self.velocidade_atual += 5
+        print(f"Caminhão acelerando... Velocidade: {self.velocidade_atual} km/h")
+
+    def carregar(self, peso):
+        self.carga_atual += peso
+        print(f"Carregado {peso}kg. Carga atual: {self.carga_atual}kg")
+
+    def descarregar(self):
+        self.carga_atual = 0
+        print("Carga descarregada!")
+
+    def info(self):
+        return f"{self.marca} {self.modelo} ({self.ano}) - {self.velocidade_atual} km/h - Carga: {self.carga_atual}/{self.capacidade_carga}kg"
+
+
+
+
+def simular_viagem(veiculo, aceleracoes, freadas):
+
+    print("\n--- SIMULANDO VIAGEM ---")
+    print(f"Executando {aceleracoes} acelerações e {freadas} freadas\n")
+
+    for i in range(aceleracoes):
+        print(f"Aceleração {i+1}:")
+        veiculo.acelerar()
+
+    for i in range(freadas):
+        print(f"\nFreada {i+1}:")
+        veiculo.frear()
+
+    print("\n--- FIM DA SIMULAÇÃO ---")
+
+
+
+
+print("=" * 50)
+print("TESTE 1: Carro")
+print("=" * 50)
+
+carro = Carro("Toyota", "Corolla", 2022, 4)
+
+print("\nSITUAÇÃO INICIAL:")
+print(carro.info())
+
+simular_viagem(carro, 3, 1)
+
+print("\nSITUAÇÃO FINAL:")
+print(carro.info())
+
+
+print("\n" + "=" * 50)
+print("TESTE 2: Moto")
+print("=" * 50)
+
+moto = Moto("Honda", "CB 600", 2021, 600)
+
+print("\nSITUAÇÃO INICIAL:")
+print(moto.info())
+
+simular_viagem(moto, 3, 1)
+
+print("\nSITUAÇÃO FINAL:")
+print(moto.info())
+
+
+print("\n" + "=" * 50)
+print("TESTE 3: Caminhão")
+print("=" * 50)
+
+caminhao = Caminhao("Scania", "R450", 2023, 15000)
+
+print("\nSITUAÇÃO INICIAL:")
+print(caminhao.info())
+
+caminhao.carregar(5000)
+
+simular_viagem(caminhao, 3, 1)
+
+print("\nSITUAÇÃO FINAL:")
+print(caminhao.info())
+
+print("\n" + "=" * 50)
+print("TODOS OS TESTES CONCLUÍDOS!")
+print("=" * 50)
+
+
+
+class Conta:
+    def __init__(self, numero, titular, saldo=0):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+
+    def depositar(self, valor):
+        self.saldo += valor
+        print(f"Depósito de R${valor:.2f} realizado!")
+
+    def sacar(self, valor):
+        pass
+
+    def consultarSaldo(self):
+        return self.saldo
+
+    def toString(self):
+        return f"Conta: {self.numero} | Titular: {self.titular} | Saldo: R${self.saldo:.2f}"
+
+
+# ==================================
+# CONTA CORRENTE
+# ==================================
+
+class ContaCorrente(Conta):
+    def __init__(self, numero, titular, saldo=0, limite=500):
+        super().__init__(numero, titular, saldo)
+        self.limite = limite
+
+    def sacar(self, valor):
+
+        if (self.saldo - valor) >= -self.limite:
+            self.saldo -= valor
+            print(f"Saque de R${valor:.2f} realizado!")
+            return True
+
+        print("Saldo insuficiente!")
+        return False
+
+    def cobrarTarifaMensal(self, taxa=10.0):
+        self.saldo -= taxa
+        print(f"Tarifa mensal de R${taxa:.2f} cobrada!")
+
+
+# ==================================
+# CONTA POUPANÇA
+# ==================================
+
+class ContaPoupanca(Conta):
+    def __init__(self, numero, titular, saldo=0, taxaDeJuros=0.005):
+        super().__init__(numero, titular, saldo)
+        self.taxaDeJuros = taxaDeJuros
+
+    def sacar(self, valor):
+
+        if (self.saldo - valor) >= 0:
+            self.saldo -= valor
+            print(f"Saque de R${valor:.2f} realizado!")
+            return True
+
+        print("Saldo insuficiente!")
+        return False
+
+    def aplicarJuros(self):
+        juros = self.saldo * self.taxaDeJuros
+        self.saldo += juros
+        print(f"Juros de R${juros:.2f} aplicados!")
+
+
+# ==================================
+# TESTE
+# ==================================
+
+cc = ContaCorrente(1, "João", 0, 500)
+cp = ContaPoupanca(2, "Maria", 0, 0.005)
+
+# Depósitos
+cc.depositar(10000)
+cp.depositar(10000)
+
+print("\nSALDOS INICIAIS:")
+print(cc.toString())
+print(cp.toString())
+
+# Aplicando tarifa e juros
+print("\nAplicando tarifa e juros...")
+cc.cobrarTarifaMensal()
+cp.aplicarJuros()
+
+print("\nSALDOS APÓS 1 MÊS:")
+print(cc.toString())
+print(cp.toString())
+
+# Simulação de 12 meses
+for mes in range(12):
+    print(f"\nMÊS {mes + 1}")
+
+    cc.cobrarTarifaMensal()
+    cp.aplicarJuros()
+
+print("\nSALDOS FINAIS:")
+print(cc.toString())
+print(cp.toString())

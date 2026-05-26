@@ -1,4 +1,4 @@
-lass Animal:
+class Animal:
     def __init__(self, nome, especie, patas):
         self.nome = nome
         self.especie = especie

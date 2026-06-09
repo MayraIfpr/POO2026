@@ -1,4 +1,5 @@
 import arcade
+import random
 
 ALTURA=600
 LARGURA=800
@@ -12,17 +13,17 @@ class Moeda(arcade.Sprite):
        self.center_x += self.change_x
        self.center_y += self.change_y
  
-       if self.center_x > 800:
-           self.change_x 
+       if(self.right > LARGURA):
+           self.change_x *= -1
 
-       elif self.center_x < 0:
-            self.change_x = 0
+       elif(self.left < 0):
+            self.change_x *= -1
+        
+       if(self.top > ALTURA):
+            self.change_y *= -1
 
-       if self.center_y > 600:
-            self.change_y = 0 
-
-       elif self.center_y < 0:
-            self.change_y = 0    
+       elif(self.bottom < 0):
+            self.change_y *= -1 
 
 
 
@@ -43,7 +44,25 @@ class Player(arcade.Sprite):
            self.texture = self.textura_direita
 
        elif self.change_x <0:
-            self.exture = self.textura_esquerda
+            self.texture = self.textura_esquerda
+
+       if(self.right > 800):
+           self.change_x = 0
+
+       elif(self.left < 0):
+         self.change_x = 0
+         self.left = 0
+        
+       if(self.top > ALTURA):
+            self.change_y = 0
+            self.top = ALTURA
+
+       elif(self.bottom < 0):
+            self.change_y = 0
+            self.bottom = 0
+
+        
+           
         
        
            
@@ -64,16 +83,27 @@ class JanelaJogo(arcade.Window):
          self.moeda.center_x = 500
          self.moeda.center_y = 300
 
-         self.moeda.center_x += self.movimento
-         self.moeda.center_y += self.movimento
+         self.moeda.change_x = self.movimento
+         self.moeda.change_y = self.movimento
 
-
-         
          self.sprite_personagem = arcade.SpriteList()
          self.sprite_personagem.append(self.personagem)
 
          self.sprite_moedas = arcade.SpriteList()
          self.sprite_moedas.append(self.moeda)
+
+         self.sprite_moedas = arcade.SpriteList()
+
+         for i in range(25):  # quantidade de moedas
+             moeda = Moeda()
+
+             moeda.center_x = random.randint(50, LARGURA - 50)
+             moeda.center_y = random.randint(50, ALTURA - 50)
+
+             moeda.change_x = random.choice([-2, 2])
+             moeda.change_y = random.choice([-2, 2])
+
+             self.sprite_moedas.append(moeda)
 
     def on_draw(self):
         self.clear()
@@ -86,6 +116,28 @@ class JanelaJogo(arcade.Window):
         self.sprite_personagem.update(delta_time)
         self.sprite_moedas.update(delta_time)
     
+    #Gerenciamento do teclado
+    def on_key_press(self, key, modifiers):
+        def on_key_press(self, key, modifiers):
+         if key == arcade.key.ESCAPE:
+            self.close()
+        if (key == arcade.key.RIGHT): 
+            self.personagem.change_x += self.movimento
+        if(key  == arcade.key.LEFT):
+            self.personagem.change_x -= self.movimento
+        if(key == arcade.key.UP):
+            self.personagem.change_y += self.movimento
+        if(key == arcade.key.DOWN):
+            self.personagem.change_y -= self.movimento
+
+        #Evento ao soltar a tecla
+    def on_key_release(self, key, modifiers):
+        if (key == arcade.key.RIGHT or key  == arcade.key.LEFT): 
+                self.personagem.change_x = 0
+        if(key == arcade.key.UP or key == arcade.key.DOWN):
+                 self.personagem.change_y = 0
+
+
 def main():
     jogo = JanelaJogo()
     arcade.run()
